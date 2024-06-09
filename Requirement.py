@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 from enum import Enum
-from Utility import solve_quadratic
+from utility import solve_quadratic
 import numpy as np
 from itertools import cycle
 from math import sqrt
