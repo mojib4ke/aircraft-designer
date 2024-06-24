@@ -13,8 +13,9 @@ class RequirementType(Enum):
 
 class Requirement():
 
-    def __init__(self, requirements):
+    def __init__(self, requirements, points=None):
         self.requirements = requirements 
+        self.points = points
             
     def loadings_plot(self, min_w_s=5, max_w_s=100, step=1) -> None:
         W_S_range = np.linspace(min_w_s, max_w_s, int((max_w_s - min_w_s) / step) + 1)
@@ -46,7 +47,12 @@ class Requirement():
                 )
                 plt.axvline(x=stall_speed_sizing_wl, label=requirement['name'], color=color)
 
-        plt.legend()
+        if self.points != None:
+            for point in self.points:
+                plt.scatter(point['wing loading'], point['power loading'], label=point['name'], marker='x')
+
+        # plt.legend()
+        plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
         plt.grid(True)
         plt.xlabel('Wing Loading (W/S)')
         plt.ylabel('Power Loading (W/P)')
